@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
+import random 
 
 load_dotenv()
 DATABASE_URL = os.getenv('DATABASE_URL')
@@ -37,10 +38,11 @@ def paste():
             burn = True
         else:
             burn = False
+        id = random.randint(1000000, 9999999)
         title = request.form.get('title')
         if not content or not poster_name or not title:
             return render_template("error.html", message="Missing required fields")
-        paste = Paste(content=content, poster_name=poster_name, burn=burn, title=title)  
+        paste = Paste(content=content, poster_name=poster_name, burn=burn, title=title, id=id)  
         db.session.add(paste)
         db.session.commit()
         url = f'/paste/{paste.id}'
