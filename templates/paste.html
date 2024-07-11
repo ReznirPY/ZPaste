@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}{{paste.title}}{% endblock %}
+{% block head %}
+<meta name="og:description" content="{{paste.content}}">
+<meta name="og:title" content="{{paste.title}}">
+<meta name="og:type" content="website">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>{{paste.title}}</h1>
+        <p>Author: {{paste.poster_name}} <br>
+        Created: {{paste.posted_at}} <br>
+        Views: {{paste.views}}</p>
+        <button class="btn btn-primary" onclick="copy('{{paste.content}}');">Copy</button>
+        <pre><code class="hljs">{{paste.content}}</code></pre>
+    </div>
+    <script>
+        function copy(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                var button = document.querySelector('button');
+                button.textContent = 'Copied';
+                setTimeout(function() {
+                    button.textContent = 'Copy';
+                }, 1000);
+
+            }, function(err) {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+{% endblock %}

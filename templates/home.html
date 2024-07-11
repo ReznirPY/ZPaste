@@ -1,0 +1,34 @@
+<!-- extend laoyout -->
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>ZPaste - Anonymouse Pasting Service</h1>
+        <p>Welcome to ZPaste, an anonymous pasting service. Paste your code snippets here and share them with others.</p>
+        <form action="/paste" method="post">
+            <fieldset>
+                <legend>Paste your text/code</legend>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="poster_name">Author</label>
+                    <input type="text" class="form-control" id="poster_name" name="poster_name" value="Anonymous">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+                </div>
+                <div class="form-group">
+                    <!-- burn option -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="burn" name="burn">
+                        <label class="form-check label" for="burn">Burn after reading</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Paste</button>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}
